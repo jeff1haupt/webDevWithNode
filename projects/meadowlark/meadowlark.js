@@ -1,8 +1,24 @@
 const express = require('express');
+const expressHandlebars = require('express-handlebars');
 
 const app = express();
 
+app.engine('handlebars', expressHandlebars({
+    defaultLayout: 'main',
+}));
+app.set('view engine', 'handlebars');
+
 const port = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+    res.type('text/plain');
+    res.send('Meadowlark Travel');
+});
+
+app.get('/about', (req, res) => {
+    res.type('text/plain');
+    res.send('About Meadowlark Travel');
+})
 
 // custom 404 page
 app.use( (req, res) => {
